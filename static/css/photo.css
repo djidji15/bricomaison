@@ -1,0 +1,131 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centre horizontalement */
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.photo:hover {
+    transform: scale(1.2); /* Applique un zoom au survol */
+}
+
+.return-button {
+    background-color: gold;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.return-button:hover {
+    background-color: darkgoldenrod;
+}
+
+.intro-section {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('contact.jpg');
+    animation: backgroundAnimation 20s linear infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.intro-content {
+    position: relative;
+    z-index: 1;
+    padding: 100px 0;
+    color: white;
+}
+
+.intro-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.intro-content p {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+    .photo-gallery {
+        margin-top: 20px; /* Réduire la marge */
+    }
+
+    .photo {
+        width: 100%; /* Occuper la largeur */
+        max-width: 300px; /* Limiter la largeur */
+        margin: 0 auto 20px; /* Centrer horizontalement */
+    }
+
+    .intro-content {
+        padding: 50px 0; /* Réduire l'espace de remplissage */
+    }
+
+    .intro-content h2 {
+        font-size: 20px; /* Ajuster la taille de la police */
+    }
+
+    .intro-content p {
+        font-size: 16px; /* Ajuster la taille de la police */
+    }
+}

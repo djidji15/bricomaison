@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admi.css">
+    <title>Document</title>
+</head>
+<body>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+        .photos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .photo {
+            margin: 10px;
+            max-width: 200px;
+        }
+        .btn-add {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .settings-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .settings-popup {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Page d'Administration</h1>
+    </div>
+    <div class="settings-icon" onclick="toggleSettingsPopup()">
+        <span>&#9881;</span>
+        
+    </div>
+    <div class="content">
+        <h2>Photos</h2> 
+        <div class="photos" id="photosContainer">
+            {% for image in photos %}
+                <div class="photo">
+                    <img src="{{ image.image.url }}" alt="Photo" width="100">
+                    <form method="post">
+                   
+                       <button type="submit" class="btn-delete" onclick="deletePhoto(this.parentNode)">Delete</button>
+                    </form>
+                </div>
+            
+            
+           
+            {% endfor %}
+        </div>      
+        <div>
+            <form method="post" enctype="multipart/form-data" action="{% url 'add_image' %}">
+                {% csrf_token %} 
+                <input type="file" name="image" id="file-input" style="display: none;">
+                <button type="submit" class="btn-add" onclick="document.getElementById('file-input').click()">Add Photo</button>
+            </form>
+        </div>
+    <div class="settings-icon" onclick="toggleSettingsPopup()">
+        <span>&#9881;</span>
+        
+    </div>
+    <div class="settings-popup" id="settingsPopup">
+        <a href="{% url 'logout' %}" >Déconnexion</a>
+        <a href="{% url 'change_password' %}">Changer le mot de passe</a>
+    </div>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            if (files && files.length > 0) {
+                const photosContainer = document.getElementById('photosContainer');
+                for (const file of files) {
+                    const photoDiv = document.createElement('div');
+                    photoDiv.classList.add('photo');
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.alt = file.name;
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Supprimer';
+                    deleteButton.className = 'btn-delete';
+                    deleteButton.onclick = function() {
+                        deletePhoto(photoDiv);
+                    };
+                    photoDiv.appendChild(img);
+                    photoDiv.appendChild(deleteButton);
+                    photosContainer.appendChild(photoDiv);
+                }
+            }
+        });
+        
+        function toggleSettingsPopup() {
+            const settingsPopup = document.getElementById('settingsPopup');
+            settingsPopup.style.display = settingsPopup.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function logout() {
+            // Mettez ici le code pour gérer la déconnexion
+            alert("Déconnexion");
+        }
+
+        function changePassword() {
+            // Mettez ici le code pour gérer le changement de mot de passe
+            alert("Changer le mot de passe");
+        }
+
+        function deletePhoto(photoDiv) {
+            const photosContainer = document.getElementById('photosContainer');
+            photosContainer.removeChild(photoDiv);
+        }
+        
+    </script>
+    
+</body>
+</html>

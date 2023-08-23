@@ -1,0 +1,47 @@
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/photo.css' %}">
+{% block coontent %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="photo.css">
+    <title>Projet Récent - Photos</title>
+</head>
+<body>
+    <section class="intro-section">
+        <div class="animated-background"></div>
+        <div class="intro-content">
+            <h2>Bienvenue dans notre Projet Récent</h2>
+            <p>Découvrez les moments capturés lors de notre projet passionnant.</p>
+        </div>
+    </section>
+    <section>
+        <button class="return-button">Retour</button>
+        <div class="photo-gallery">
+            {% for image in ph %}
+            <div class="photo">
+                <li><img src="{{image.image.url}}" alt="Photo" width="100"></li>
+            </div>
+            {% endfor %}
+            
+           
+           
+           
+           
+           
+            
+            
+            
+           
+            
+            
+           
+        </div>
+    </section>
+    
+    
+    </body>
+    </html>
+{% endblock coontent %}
