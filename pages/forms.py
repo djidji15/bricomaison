@@ -1,3 +1,4 @@
 from django import forms
-from .models import Image
+from .models import Video
+
 

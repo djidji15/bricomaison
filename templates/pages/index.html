@@ -1,0 +1,387 @@
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block coontent %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-UA-Compatible" content="IE=edge"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>entreprise</title>
+</head>
+<body>
+<header>
+    <a href="#"  class="logo"><span>B</span>ricoMaison</a>
+    <div class="menuToggle" onclick="toggleMenu();"></div>
+    <ul class="navbar">
+        <li><a href="#home" onclick="toggleMenu();">Accueil</a></li>
+        <li><a href="#apropos" onclick="toggleMenu();">À propos</a></li>
+        <li><a href="#service" onclick="toggleMenu();">Services</a></li>
+        <li><a href="#temoinage" onclick="toggleMenu();">Témoiages</a></li>
+        <li><a href="#menu" onclick="toggleMenu();">Projets</a></li>
+        <li><a href="#contact" onclick="toggleMenu();">Contact</a></li>
+        <a href="{% url 'cnx' %}" class="cnx" onclick="toggleMenu();">connexion</a>
+    </ul>
+</header>
+<section class="home" id="home">
+    <div class="contenu">
+      <h2>entreprise d'aménagment et de décoration</h2>
+      <p>Une métamorphose complète à portée de main. Nos compétences en peinture, construction, électricité, plomberie et plus encore transforment votre espace selon vos souhaits.</p>
+      <a href="#contact" class="btn1">contacter</a>
+      <a href="#menu" class="btn2">nos projets</a>
+    </div>
+ 
+ </section>
+ 
+ <section class="apropo" id="apropos">
+     <div class="row">
+         <div class="col50">
+             <h2 class="titre-texte"><span>À </span>propos de nous </h2>
+             <p>Chez BricoMaison, nous sommes vos experts en génie du bâtiment. De la plomberie à l'électricité, en passant par les systèmes de sécurité, le chauffage, la décoration intérieure, les revêtements de sol et plus encore, nous sommes là pour donner vie à vos idées. Notre équipe polyvalente associe qualité, innovation et savoir-faire pour créer des espaces fonctionnels et esthétiques qui dépassent vos attentes. Faites confiance à BricoMaison pour réaliser vos projets avec excellence.</p>
+         </div>
+     
+         <div class="col50">
+             <div class="img"> 
+               <img src="{% static 'image/pint.webp' %}" alt="image">
+               
+             </div>
+             <div class="img">
+              <img src="{% static 'image/ploim.jpg' %}" alt="Image 2">
+             </div >
+             <div class="img">
+              <img src="{% static 'image/bet.png' %}" alt="Image 2">
+             </div> 
+             <div class="img">
+                 <img src="{% static 'image/dlso.jpg' %}" alt="Image 2">
+             </div>
+             <div class="img">
+                 <img src="{% static 'image/tris.jpeg' %}" alt="Image 2">
+             </div>  
+             <div class="img">
+                 <img src="{% static 'image/cam.jpg' %}" alt="Image 2">
+             </div>
+ 
+         </div>
+         <script src="scipt.js"></script>
+     </div>
+ 
+ </section>
+ <section class="service" id="service">
+     <div class="titre noir">
+         <h2 class="titre-text">No <span>S</span>ervices</h2>
+     </div>
+     <div class="services">
+     
+         <div class="service-box" onclick="showDetails('service1')">
+             <h2 class="or"><span>plomberie</span></h2>
+             <p>Plomberie Complète</p>
+             <div class="details" id="service1">
+                 <p> Experts en tous types de travaux de plomberie, assurant un flux fluide dans chaque coin de votre espace.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service2')">
+             <h2>l'électricité</h2>
+             <p>Électricité Simplifiée</p>
+             <div class="details" id="service2">
+                 <p>Experte en solutions électriques pour un confort moderne et une sécurité totale.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service3')">
+             <h2 class="or"><span>peinture</span></h2>
+             <p>Peinture Polyvalente</p>
+             <div class="details" id="service3">
+                 <p>Maîtrise de toutes les peintures murales, pour des espaces qui prennent vie sous vos couleurs préférées.</p>
+             </div>
+         </div>
+         
+         <div class="service-box" onclick="showDetails('service4')">
+             <h2>caméras </h2>
+             <p>Surveillance Confidente </p>
+             <div class="details" id="service4">
+                 <p>Des solutions de caméras de surveillance pour une sécurité sans faille, veillant sur ce qui compte le plus.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service5')">
+             <h2 class="or"><span>construction</span></h2>
+             <p>Création Globale</p>
+             <div class="details" id="service5">
+                 <p>De la conception intérieure à la transformation extérieure, nous réalisons vos espaces de rêve.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service6')">
+             <h2>décoration</h2>
+             <p>Décoration à 360°</p>
+             <div class="details" id="service6">
+                 <p> De l'intérieur à l'extérieur, nous créons des ambiances qui reflètent votre style personnel, transformant chaque coin en un espace unique</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service7')">
+             <h2 class="or"><span>Climatisation</span></h2>
+             <p>Climat Confort </p>
+             <div class="details" id="service7">
+                 <p> Spécialistes de la climatisation pour un environnement frais et agréable, adapté à chaque saison de l'année.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service8')">
+             <h2> dalle de sol</h2>
+             <p>Sol en Force </p>
+             <div class="details" id="service8">
+                 <p> Expérimentés en dalles et faïences pour des sols et murs robustes, offrant beauté et résistance à chaque espace.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service9')">
+             <h2 class="or"><span>visiophone</span></h2>
+             <p>Communication Sécurisée</p>
+             <div class="details" id="service9">
+                 <p>Des solutions de visiophonie pour une communication transparente et sécurisée, reliant chaque regard et chaque voix.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service10')">
+             <h2 class="nor"><span>Béton </span></h2>
+             <p>Béton Solide</p>
+             <div class="details" id="service10">
+                 <p> Experts en béton pour des fondations fiables et des structures durables, construisant la base de vos idées.</p>
+             </div>
+         </div>
+         <div class="service-box" onclick="showDetails('service11')">
+             <h2 class="nor"><span>chauffage</span></h2>
+             <p>Chaleur Bienveillante</p>
+             <div class="details" id="service11">
+                 <p> Maîtrise des solutions de chauffage pour un confort thermique optimal, créant une atmosphère chaleureuse dans chaque recoin.</p>
+             </div>
+         </div>
+         
+         
+ 
+ 
+ 
+     
+    
+     </div>
+     <script src="scipt.js"></script>
+ </section>
+ 
+ <section class="temoinage" id="temoinage">
+     <div class="=titre blanc" >
+       <h2 class="titre-texte">que disent Nos <span>C</span>lients</h2>
+       <p>Votre satisfaction est notre plus grande récompense, et nous sommes ravis que notre travail réponde à vos attentes</p>
+     </div>
+     <div class="contenu">
+         <div class="box">
+            <div class="inbox">
+             <img src="{% static 'image/1.jpeg' %}" alt="img1">
+            </div>
+ 
+         
+             <div class="text">
+                <p> Nous sommes ravis de voir notre espace transformé de manière si professionnelle. Merci à BricoMaison pour leur excellent travail .</p>
+                <h3>dahman Houcine</h3>
+ 
+             </div>
+         </div>    
+         <div class="box">
+             <div class="inbox">
+              <img src="{% static 'image/2.jpeg' %}" alt="img2">
+             </div>
+  
+          
+             <div class="text">
+                <p>Le travail accompli par BricoMaison est tout simplement exceptionnel, Nous sommes ravis d'avoir choisi BricoMaison pour notre projet .</p>
+                <h3>Rahmani saida </h3>
+  
+             </div>
+         </div>
+ 
+         
+         <div class="box">
+             <div class="inbox">
+              <img src="{% static 'image/3.jpeg' %}" alt="img3">
+             </div>
+  
+             <div class="text">
+                <p> Chaque aspect a été exécuté avec compétence, et le résultat final témoigne de leur expertise. Un merci à BricoMaison pour leur excellent travail</p>
+                <h3>yenneb djamela</h3>
+  
+             </div>
+         </div>
+ 
+     </div>
+ 
+ 
+ 
+ 
+ </section>
+ <section class="menu" id="menu">
+     <div class="titre">
+         <h1 class="titre-texte"><span>P</span>rojets</h1>
+         
+     </div>
+     <div class="contenu">
+         <div class="box">
+             <div class="imbox">
+                 <img src="{% static 'image/talaa.jpg' %}" alt="">
+             </div>
+             
+         </div>
+         <div class="box">
+             <div class="imbox">
+                 <img src="{% static 'image/cam.jpg' %}" alt="">
+             </div>
+            
+         </div>
+         <div class="box">
+             <div class="imbox">
+                 <img src="{% static 'image/tris.jpeg' %}" alt="">
+             </div>
+           
+         </div>
+         <div class="box">
+             <div class="imbox">
+                 <img src="{% static 'image/Cabinets (1).jpg' %}" alt="">
+             </div>
+             
+         </div>
+       
+         
+        
+        
+     </div>
+  </div>
+  <script src="scipt.js"></script>
+  <div class="titre">
+     <a href="#" class="btn1">Voir Plus</a>
+  </div>
+ </section>
+
+
+<section class="contact" id="contact">
+    <div class="titre noir">
+        <h2 class="titre-text"><span>C</span>ontact</h2>
+        <p>Nous sommes impatients de vous entendre. N'hésitez pas à nous contacter pour toute question, suggestion ou collaboration. Votre message est important pour nous</p>
+    </div>
+    {% if message_sent %}
+       <p>Votre message a été envoyé avec succès.</p>
+    {% else %}
+       <p>Votre message n'a pas pu être envoyé. Veuillez réessayer.</p>
+    {% endif %}
+    <form method="post" class="contactform" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <h3>Envoyer un message</h3>
+        <div class="inputboite">
+            <input type="text" placeholder="Nom" name="first_name">
+        </div>
+        <div class="inputboite">
+            <input type="text" placeholder="Prénom" name="last_name">
+        </div>
+        <div class="inputboite">
+            <input type="text" placeholder="Sujet" name="subject">
+        </div>
+        <div class="inputboite">
+            <input type="text" placeholder="E-mail" name="email">
+        </div>
+        <div class="inputboite">
+            <textarea placeholder="Message" name="message"></textarea>
+        </div>
+        <div class="inputboite">
+            <input type="submit" value="Envoyer">
+        </div>
+        {% if message_sent %}
+            <p>Votre message a été envoyé avec succès.</p>
+        {% else %}
+            <p>Votre message n'a pas pu être envoyé. Veuillez réessayer.</p>
+        {% endif %}
+    </form>
+    <div class="contactinfo">
+        <h3>Coordonnées</h3>
+        <p>Numéro de téléphone : <span>0792521303/0791089107</span></p>
+        <p>E-mail : <span>habilamoustafa@hotmail.fr</span></p>
+    </div>
+</section>
+<section class="footer" id="footer">
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h4>À propos de nous</h4>
+                <p>Votre spécialiste en génie du bâtiment.</p>
+            </div>
+            <div class="footer-right">
+                <h4>Contactez-nous</h4>
+                <p>Téléphone : 0792521303/0791089107</p>
+                <p>Email : habilamoustafa@hotmail.fr</p>
+                <div class="social-icons">
+                    <a href="lien_vers_facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="lien_vers_twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="lien_vers_instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</section>
+<script type="text/javascript">
+    window.addEventListener('scroll', function(){
+        const header =document.querySelector('header');
+        header.classList.toggle("sticky", window.scrollY > 0 );
+    });
+    
+    function toggleMenu(){
+         const tmenuToggle = document.querySelector('.menuToggle');
+         const navbar = document.querySelector('.navbar');
+         navbar.classList.toggle('active');
+         menuToggle.classList.toggle('active');
+     }
+
+    let slideIndex = 0;
+
+    showSlides();
+
+    function showSlides() {
+      let slides = document.getElementsByClassName("img");
+  
+      for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+      }
+  
+      slideIndex++;
+  
+     if (slideIndex > slides.length) {
+     slideIndex = 1;
+     } 
+  
+     slides[slideIndex - 1].style.display = "block";
+  
+     setTimeout(showSlides, 1000); // Change d'image toutes les 2 secondes
+    }
+    function showDetails(id) {
+      var details = document.getElementById(id);
+      if (details.style.display === "block") {
+         details.style.display = "none";
+      } else {
+         details.style.display = "block";
+        }
+    }
+    const imageBoxes = document.querySelectorAll('.imbox');
+
+    // Ajouter un gestionnaire d'événement à chaque boîte d'image
+    imageBoxes.forEach(imageBox => {
+       imageBox.addEventListener('click', () => {
+            // Ajouter ou supprimer la classe "effet" lors du clic
+            imageBox.classList.toggle('effet');
+        });
+    });
+
+</script>
+
+  
+</body>
+</html>
+{% endblock coontent %}

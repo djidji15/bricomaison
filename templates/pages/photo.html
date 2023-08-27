@@ -19,12 +19,25 @@
     </section>
     <section>
         <button class="return-button">Retour</button>
+    </section>
         <div class="photo-gallery">
-            {% for image in ph %}
+            {% for image in photos %}
             <div class="photo">
                 <li><img src="{{image.image.url}}" alt="Photo" width="100"></li>
             </div>
             {% endfor %}
+    </section>
+    <section>
+       <h1>video</h1>
+        <ul>
+            {% for video in videos %}
+                <li>
+                  <h2>{{ video.titre }}</h2>
+                  <iframe src="{{ video.lien }}" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
             
            
            

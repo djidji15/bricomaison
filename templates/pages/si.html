@@ -1,0 +1,127 @@
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/sisi.css' %}">
+{% block coontent %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+       <h1>Page d'Administration</h1>
+        <div class="settings-icon" onclick="toggleSettingsPopup()">
+           <span>&#9881;</span>
+        
+        </div>
+        <div class="settings-popup" id="settingsPopup">
+           <a href="{% url 'logout' %}" >Déconnexion</a>
+           <a href="{% url 'change_password' %}">Changer le mot de passe</a>
+        </div>
+    </div>
+    <div class="photos" id="photosContainer">
+        <h1>photos peinture</h1>
+        {% for image in photos %}
+            <div class="photo">
+                <img class="image" src="{{ image.image.url }}" alt="Photo" width="50">
+                <form method="post" class="btns" action="{% url 'delete_image' image.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete" onclick="deletePhoto(this.parentNode)"">Supprimer</button>
+                </form>
+            </div>
+        
+       
+        {% endfor %}
+        <div>
+            <form id="addImageForm" method="post" enctype="multipart/form-data" action="{% url 'add_image' %}">
+                {% csrf_token %} 
+                <input type="file" name="image" id="file-input" style="display: none;">
+                <button type="button" class="btn-add" onclick="addPhoto()">Add Photo</button>
+                <input type="submit" style="display: none;">
+            </form>
+        </div>
+    </div>
+    <div  class="videos"> 
+        <h1>Liste des vidéos pinture</h1>
+        <div class="vids">
+            <ul>
+                {% for video in videos %}
+                    <div class="vid">
+                        <h2>{{ video.titre }}</h2>
+                        <iframe src="{{ video.lien }}" width="300" height="100" frameborder="3" allowfullscreen></iframe>
+                    </div>
+                    <form method="post" action="{% url 'supprimer_video' video.id %}" class="btns">
+                        {% csrf_token %}
+                        <button type="submit">Supprimer</button>
+                    </form>
+                {% endfor %}
+            </ul>
+        </div>
+        <form method="post"  class="btna"  action="{% url 'ajouter_video' %}">
+            {% csrf_token %}
+            <label for="titre">Titre :</label>
+            <input type="text" name="titre"><br>
+            <label for="lien">Lien Google Drive :</label>
+            <input type="text" name="lien"><br>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        
+
+    </div>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const uploadBtn = document.getElementById('upload-btn');
+        const imageContainer = document.getElementById('image-container');
+        const logoutBtn = document.getElementById('logout-btn');
+        const changePasswordBtn = document.getElementById('change-password-btn');
+
+        uploadBtn.addEventListener('click', () => {
+           const file = fileInput.files[0];
+            if (file) {
+             const imageUrl = URL.createObjectURL(file);
+             const image = document.createElement('div');
+             image.className = 'image';
+              image.innerHTML = `<img src="${imageUrl}" alt="Uploaded Image">`;
+             imageContainer.appendChild(image);
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+           // Gérer la déconnexion ici
+           alert('Déconnexion effectuée.');
+        });
+
+        changePasswordBtn.addEventListener('click', () => {
+         // Gérer le changement de mot de passe ici
+         alert('Changement de mot de passe.');
+        });
+
+        function toggleSettingsPopup() {
+            const settingsPopup = document.getElementById('settingsPopup');
+            settingsPopup.style.display = settingsPopup.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function logout() {
+            // Mettez ici le code pour gérer la déconnexion
+            alert("Déconnexion");
+        }
+
+        function changePassword() {
+            // Mettez ici le code pour gérer le changement de mot de passe
+            alert("Changer le mot de passe");
+        }
+
+        function deletePhoto(photoDiv) {
+            const photosContainer = document.getElementById('photosContainer');
+            photosContainer.removeChild(photoDiv);
+        }
+        
+    </script>
+    </script>
+    
+
+</body>
+{% endblock coontent %}

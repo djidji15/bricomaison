@@ -1,59 +1,133 @@
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/sisi.css' %}">
+{% block coontent %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admi.css">
+   
     <title>Document</title>
 </head>
 <body>
       <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-        .content {
-            text-align: center;
-            padding: 20px;
-        }
-        .photos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .photo {
-            margin: 10px;
-            max-width: 200px;
-        }
-        .btn-add {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        .settings-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .settings-popup {
-            display: none;
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+      body, h1, h2, h3, p, ul, li, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles pour l'en-tête */
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Styles pour le contenu principal */
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Styles pour les boutons */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour les photos */
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.photo {
+    position: relative;
+}
+
+.photo img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.photo .btn-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Styles pour les vidéos */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: white;
+}
+
+ul li h2 {
+    margin-top: 0;
+}
+
+/* Styles pour l'icône des paramètres */
+.settings-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Styles pour la boîte de dialogue des paramètres */
+.settings-popup {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.settings-popup a {
+    display: block;
+    margin: 10px 0;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.settings-popup a:hover {
+    color: #007bff;
+}
     </style>
 </head>
 <body>
@@ -69,24 +143,56 @@
         <div class="photos" id="photosContainer">
             {% for image in photos %}
                 <div class="photo">
-                    <img src="{{ image.image.url }}" alt="Photo" width="100">
-                    <form method="post">
-                   
-                       <button type="submit" class="btn-delete" onclick="deletePhoto(this.parentNode)">Delete</button>
+                    <img src="{{ image.image.url }}" alt="Photo" width="50">
+                    <form method="post" action="{% url 'delete_image' image.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" onclick="deletePhoto(this.parentNode)"">Supprimer</button>
                     </form>
                 </div>
             
-            
            
             {% endfor %}
+            <div>
+                <form id="addImageForm"  method="post" enctype="multipart/form-data" action="{% url 'add_image' %}">
+                    {% csrf_token %} 
+                    <input type="file" name="image" id="file-input" style="display: none;">
+                    <button type="button" class="btn-add" onclick="addPhoto()">Add Photo</button>
+                    <input type="submit" style="display: none;">
+                </form>
+            </div>
+            
+
         </div>      
-        <div>
-            <form method="post" enctype="multipart/form-data" action="{% url 'add_image' %}">
-                {% csrf_token %} 
-                <input type="file" name="image" id="file-input" style="display: none;">
-                <button type="submit" class="btn-add" onclick="document.getElementById('file-input').click()">Add Photo</button>
+       
+        <div class="video"  > 
+           <h1>Ajouter une vidéo</h1>
+           <form method="post" class="aj"  action="{% url 'ajouter_video' %}">
+              {% csrf_token %}
+              <label for="titre">Titre :</label>
+              <input type="text" name="titre"><br>
+              <label for="lien">Lien Google Drive :</label>
+              <input type="text" name="lien"><br>
+              <button type="submit">Ajouter</button>
             </form>
-        </div>
+
+        
+  
+           <h1>Liste des vidéos</h1>
+           
+            {% for video in videos %}
+                <div>
+                    <h2>{{ video.titre }}</h2>
+                    <iframe src="{{ video.lien }}" width="300" height="100" frameborder="3" allowfullscreen></iframe>
+                </div>
+                <form method="post"  class="btn" action="{% url 'supprimer_video' video.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Supprimer</button>
+                </form>
+            {% endfor %}
+        </div>    
+        
+        
+    </div> 
     <div class="settings-icon" onclick="toggleSettingsPopup()">
         <span>&#9881;</span>
         
@@ -96,13 +202,18 @@
         <a href="{% url 'change_password' %}">Changer le mot de passe</a>
     </div>
     <script>
-        const fileInput = document.getElementById('file-input');
+        const fileInput = document.getElementById("file-input");
+        
+        function addPhoto() {
+            fileInput.click();
+        }
         
         fileInput.addEventListener('change', (event) => {
             const files = event.target.files;
             if (files && files.length > 0) {
                 const photosContainer = document.getElementById('photosContainer');
                 for (const file of files) {
+                    addImageForm.submit();
                     const photoDiv = document.createElement('div');
                     photoDiv.classList.add('photo');
                     const img = document.createElement('img');
@@ -120,6 +231,7 @@
                 }
             }
         });
+        
         
         function toggleSettingsPopup() {
             const settingsPopup = document.getElementById('settingsPopup');
@@ -145,3 +257,4 @@
     
 </body>
 </html>
+{% endblock coontent %}

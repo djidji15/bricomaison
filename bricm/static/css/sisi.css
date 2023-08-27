@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles pour le fond d'ensemble */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Styles pour l'en-tête */
+.header {
+    background-color: #ffd700;
+    color: #333;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Styles pour l'icône de paramètres */
+.settings-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffd700;
+    color: #333;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Styles pour la fenêtre contextuelle de paramètres */
+.settings-popup {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.settings-popup a {
+    display: block;
+    margin: 10px 0;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.settings-popup a:hover {
+    color: #007bff;
+}
+
+/* Styles pour la section des photos */
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.photo {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Styles pour les boutons */
+.btn {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Styles pour la section des vidéos */
+.video {
+    margin-top: 40px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.video h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+
+/* Réglages de la mise en page */
+@media (max-width: 768px) {
+    .photos, .video {
+        max-width: 90%;
+    }
+
+    .video iframe {
+        height: 200px;
+    }
+}
+.aj {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.aj label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.aj input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.aj button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.aj button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+.vid {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.vid h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.vid iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+}
+
+.vid .btn {
+    margin-top: 10px;
+}
+
+.vid .btn button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.vid .btn button:hover {
+    background-color: #c82333;
+}
+
+
+/* Réglages de la mise en page */
+@media (max-width: 768px) {
+    .aj {
+        max-width: 90%;
+    }
+}
