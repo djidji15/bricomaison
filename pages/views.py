@@ -21,16 +21,32 @@ import smtplib
 from django.conf import settings
 from django.shortcuts import render
 from .models import Video
+from django.contrib.auth.tokens import default_token_generator
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+import random
+import string
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import PasswordResetForm
+
+
+
+
+
 
 
 
 
 # Create your views here.
-def cnx(request):
+def login(request):
     if request.method == 'POST':
+        email = request.POST['email']
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password , email=email)
         if user is not None:
             login(request, user)
             return redirect('admi')  # Rediriger vers une page après la connexion réussie
@@ -40,10 +56,6 @@ def cnx(request):
     return render(request, 'pages/login.html')
 
 @login_required  
-#def admi(request):
-    
-    #return render(request, 'pages/admi.html')
- 
 def logout_view(request):
     logout(request)
     return redirect('cnx')
@@ -67,7 +79,6 @@ def admi(request):
     videos = Video.objects.all()
     return render(request, 'pages/admi.html', {'photos': photos, 'videos': videos})
      
-
 def add_image(request):
     if request.method == 'POST':
         image_file = request.FILES.get('image')
@@ -85,28 +96,11 @@ def add_image(request):
         return redirect('admi') 
     return render(request, 'pages/admi.html')
 
-
-#def photo(request):
-    photos = Image.objects.all()  # Récupère toutes les photos de la base de données
-    return render(request, 'pages/admi.html', {'photos': photos})
-
 def photo_list(request):
-    photos = Image.objects.all()  # Récupère toutes les photos de la base de données
-    videos = Video.objects.all() # Récupère toutes les photos de la base de données
+    photos = Image.objects.all()  
+    videos = Video.objects.all() 
     return render(request, 'pages/photo.html', {'photos': photos, 'videos': videos})
 
-
-
-    
-
-
-#def delete_image(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
-    if request.method == 'POST':
-        image.image.delete()  # Supprime le fichier image du système de fichiers
-        image.delete()  # Supprime l'objet Image de la base de données
-        return redirect('admi')  # Redirigez vers la page utilisateur ou toute autre page souhaitée
-    return render(request, 'pages/admi.html', {'image': image})
 def delete_image(request, image_id):
     if request.method == 'POST':
         try:
@@ -128,9 +122,6 @@ def supprimer_video(request, video_id):
             print("Vidéo non trouvée")
     
     return redirect('admi')
-
-
-
 
 def contact(request):
     message_sent = False
@@ -179,18 +170,67 @@ def ajouter_video(request):
     
     return render(request, 'pages/admi.html')
 
-#def afficher_videos(request):
-    videos = Video.objects.all()
-    for video in videos:
-       print(video.titre)
-    return render(request,'pages/photo.html', {'videos': videos})
 
+#def reset_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            error_message = "Aucun utilisateur avec cette adresse e-mail"
+            return render(request, 'pages/login.html', {'error_message': error_message})
 
+        token = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
+        user.profile.reset_token = token
+        user.profile.save()
 
+        reset_link = request.build_absolute_uri('/rns/') + f'?token={token}'  # Remplacez par le lien de réinitialisation réel
+        send_mail(
+            'Réinitialisation de mot de passe',
+            f'Cliquez sur le lien suivant pour réinitialiser votre mot de passe : {reset_link}',
+            'votre@email.com',
+            [email],
+            fail_silently=False,
+        )
+
+        success_message = "Un lien de réinitialisation a été envoyé à votre adresse e-mail"
+        return render(request, 'pages/login.html', {'success_message': success_message})
+
+    return render(request, 'pages/login.html')
+
+#def reset_password_confirm(request, token):
+    user_profile = get_object_or_404(User, reset_token=token)
+    
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        
+        if password != confirm_password:
+            error_message = "Les mots de passe ne correspondent pas"
+            return render(request, 'pages/rst_mdp.html', {'error_message': error_message})
+        
+        user = user_profile.user
+        user.set_password(password)
+        user.save()
+        
+        user_profile.reset_token = ''  # Réinitialisez le token après utilisation
+        user_profile.save()
+        
+        success_message = "Votre mot de passe a été réinitialisé avec succès"
+        return render(request, 'pages/rst_mdp.html', {'success_message': success_message})
+    
+    return render(request, 'pages/rst_mdp.html')
         
 
-        
-
+def password_reset(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            return redirect('password_reset_confirm')  # Redirige vers la vue de confirmation de réinitialisation de mot de passe
+    else:
+        form = PasswordResetForm()
+    return render(request, 'pages/password_reset.html', {'form': form})
 
 
 

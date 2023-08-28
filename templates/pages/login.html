@@ -15,18 +15,21 @@
 <body>
     
     <div class="login-box">
-        <center><h2>connexion</h2></center>
+        <center><h2>Connexion</h2></center>
         
         <form method="POST">
             {% csrf_token %}
-                
+            <div class="user-box">
+                <input type="email" name="email" required="">
+                <label>Adresse e-mail</label>
+            </div>    
             <div class="user-box">
                 <input type="text" name="username" required="">
-                <label>adresse</label>
+                <label>Nom</label>
             </div>
             <div class="user-box">
                 <input type="password" name="password" required="">
-                <label>mot de passe</label>
+                <label>Mot de passe</label>
             </div>
             <center>
                 <button type="submit" class="hihi">
@@ -35,8 +38,13 @@
                 <a href="{% url 'contact' %}" class="return-btn">
                     Retourner
                     <span></span>
-                </a>    
+                </a> 
+                <a href="{% url 'password_reset' %}">mot de passe oublié?</a>
+               
+                
+                   
             </center>
+          
         </form>
         {% if error_message %}
             <p class="error">{{ error_message }}</p>

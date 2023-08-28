@@ -26,12 +26,12 @@
         <li><a href="#temoinage" onclick="toggleMenu();">Témoiages</a></li>
         <li><a href="#menu" onclick="toggleMenu();">Projets</a></li>
         <li><a href="#contact" onclick="toggleMenu();">Contact</a></li>
-        <a href="{% url 'cnx' %}" class="cnx" onclick="toggleMenu();">connexion</a>
+        <a href="{% url 'login' %}" class="cnx" onclick="toggleMenu();">connexion</a>
     </ul>
 </header>
 <section class="home" id="home">
     <div class="contenu">
-      <h2>entreprise d'aménagment et de décoration</h2>
+      <h2>entreprise de réalisation, d'aménagment et de décoration</h2>
       <p>Une métamorphose complète à portée de main. Nos compétences en peinture, construction, électricité, plomberie et plus encore transforment votre espace selon vos souhaits.</p>
       <a href="#contact" class="btn1">contacter</a>
       <a href="#menu" class="btn2">nos projets</a>
@@ -255,7 +255,8 @@
   </div>
   <script src="scipt.js"></script>
   <div class="titre">
-     <a href="#" class="btn1">Voir Plus</a>
+     <a href="{% url 'photo_list' %}" class="btn1">Voir Plus</a>
+    
   </div>
  </section>
 

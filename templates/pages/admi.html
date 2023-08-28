@@ -140,8 +140,10 @@ ul li h2 {
     </div>
     <div class="content">
         <h2>Photos</h2> 
-        <div class="photos" id="photosContainer">
+        <section class="photos" id="photosContainer">
+
             {% for image in photos %}
+            
                 <div class="photo">
                     <img src="{{ image.image.url }}" alt="Photo" width="50">
                     <form method="post" action="{% url 'delete_image' image.id %}">
@@ -162,11 +164,11 @@ ul li h2 {
             </div>
             
 
-        </div>      
+        </section>      
        
-        <div class="video"  > 
+        <section class="video" id="video"  > 
            <h1>Ajouter une vidéo</h1>
-           <form method="post" class="aj"  action="{% url 'ajouter_video' %}">
+           <form method="post" class="aj"  id="video" action="{% url 'ajouter_video' %}">
               {% csrf_token %}
               <label for="titre">Titre :</label>
               <input type="text" name="titre"><br>
@@ -189,7 +191,7 @@ ul li h2 {
                     <button type="submit">Supprimer</button>
                 </form>
             {% endfor %}
-        </div>    
+        </section>    
         
         
     </div> 
@@ -200,6 +202,8 @@ ul li h2 {
     <div class="settings-popup" id="settingsPopup">
         <a href="{% url 'logout' %}" >Déconnexion</a>
         <a href="{% url 'change_password' %}">Changer le mot de passe</a>
+        <a href="#photosContainer" onclick="toggleMenu();">photos</a>
+        <a href="#video" onclick="toggleMenu();">videos</a>
     </div>
     <script>
         const fileInput = document.getElementById("file-input");
@@ -207,6 +211,12 @@ ul li h2 {
         function addPhoto() {
             fileInput.click();
         }
+        function toggleMenu(){
+         const tmenuToggle = document.querySelector('.menuToggle');
+         const navbar = document.querySelector('.navbar');
+         navbar.classList.toggle('active');
+         menuToggle.classList.toggle('active');
+        }  
         
         fileInput.addEventListener('change', (event) => {
             const files = event.target.files;

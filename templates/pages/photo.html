@@ -14,45 +14,36 @@
         <div class="animated-background"></div>
         <div class="intro-content">
             <h2>Bienvenue dans notre Projet Récent</h2>
-            <p>Découvrez les moments capturés lors de notre projet passionnant.</p>
+            <p>Découvrez les moments capturés lors de notre projet passionnant</p>>
         </div>
+        <a href="{% url 'contact' %}" class="cnx" onclick="toggleMenu();">retour</a>
     </section>
-    <section>
-        <button class="return-button">Retour</button>
-    </section>
+    <section class="Photos">
         <div class="photo-gallery">
+            <h1>photos</h1>
             {% for image in photos %}
             <div class="photo">
                 <li><img src="{{image.image.url}}" alt="Photo" width="100"></li>
             </div>
             {% endfor %}
-    </section>
-    <section>
-       <h1>video</h1>
-        <ul>
-            {% for video in videos %}
-                <li>
-                  <h2>{{ video.titre }}</h2>
-                  <iframe src="{{ video.lien }}" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-            
-           
-           
-           
-           
-           
-            
-            
-            
-           
-            
-            
-           
         </div>
     </section>
+    <section class="video">
+        <div>
+            <h1>vidéos</h1>
+            <ul class="video-grid">
+                {% for video in videos %}
+                    <li>
+                        <div class="video-container">
+                            <iframe class="lien" src="{{ video.lien }}" width="400" height="300" frameborder="0" allowfullscreen></iframe>
+                            <h2 class="titre">{{ video.titre }}</h2>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+   
     
     
     </body>

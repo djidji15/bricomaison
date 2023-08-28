@@ -32,6 +32,7 @@ body {
 }
 
 /* Styles pour la fenêtre contextuelle de paramètres */
+/* Styles pour la boîte de dialogue des paramètres */
 .settings-popup {
     position: fixed;
     bottom: 50px;
@@ -41,6 +42,7 @@ body {
     padding: 10px;
     display: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Assure une superposition au-dessus d'autres éléments */
 }
 
 .settings-popup a {
@@ -53,6 +55,34 @@ body {
 
 .settings-popup a:hover {
     color: #007bff;
+}
+
+/* Ajouter une bordure au survol des liens */
+.settings-popup a:hover {
+    border-bottom: 1px solid #007bff;
+}
+
+/* Styles pour l'icône de fermeture de la boîte de dialogue */
+.settings-popup .close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #777;
+    font-size: 18px;
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .photos, .video, .aj {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .video iframe {
+        height: 200px;
+    }
+}
+
+.settings-popup .close-icon:hover {
+    color: #333;
 }
 
 /* Styles pour la section des photos */
@@ -94,12 +124,16 @@ body {
 }
 
 .btn-add {
-    background-color: #28a745;
+    background-color: #28a745; /* Couleur verte */
     color: white;
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: #218838; /* Couleur verte plus sombre au survol */
 }
 
 /* Styles pour la section des vidéos */

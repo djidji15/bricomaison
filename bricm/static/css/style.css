@@ -87,7 +87,7 @@ header .navbar li a:hover{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(trav.jpg);
+  background-image: url(../image/trav.jpg);
   background-size: cover;
 }
 .home .contenu{
@@ -213,7 +213,7 @@ img{
 
 /*hi*/
 .temoinage{
-    background-image: url(decoration.webp);
+    background-image: url(../image/decoration.webp);
     background-size: cover;
 
 }
@@ -285,7 +285,7 @@ img{
 }
 
 .contact{
-    background-image: url(contact.jpg);
+    background-image: url(../image/contact.jpg);
     background-size: cover;
     box-shadow: 2px 2px 12px rgba(0,0,0, 0.8);
     width: 100%;
@@ -384,7 +384,7 @@ img{
     color: #FFCC00;
 }
 .services{
-    background-image: url(Cabinets\ \(1\).jpg);
+    background-image: url(../image/Cabinets\ \(1\).jpg);
     background-size: cover;
 
 }
@@ -724,7 +724,7 @@ header .navbar.active{
     position: relative;
     width: 40px;
     height: 40px;
-    background-image: url(menu.png);
+    background-image: url(../image/menu.png);
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -733,7 +733,7 @@ header .navbar.active{
 
 .menuToggle.active
 {
-    background-image: url(close.png);
+    background-image: url(../image/close.png);
     background-size: 25px;
     background-repeat: no-repeat;
     background-origin: center;

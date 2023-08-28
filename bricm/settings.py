@@ -138,3 +138,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'djouharayasima@gmail.com'
 EMAIL_HOST_PASSWORD = 'vmibzazfrmteoujm'
 
+
+LOGIN_URL = 'login'  
